@@ -66,6 +66,11 @@ and compare to::
     >>> s.synchronous('mail.python.org',adns.rr.A)
     (0, None, 1107034862, ('194.109.207.14',))
 
+
+it also support AAAA dns records:
+    >>> s.synchronous('mail.python.org',adns.rr.AAAA)
+    (0, None, 1107034862, ('2001:4802:7901:0:e60a:1375:0:6',))
+
 Prefer to use exceptions to processing status codes? adns.exception(status)
 will raise an appropriate exception. Sometimes you need to have the result,
 even when there is an exceptional condition. The exceptions are:

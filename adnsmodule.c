@@ -115,6 +115,7 @@ static _constant_class adns_rr[] = {
     { "unknown", adns_r_unknown },
     { "none", adns_r_none },
     { "A", adns_r_a },
+    { "AAAA", adns_r_aaaa },
     { "NSraw", adns_r_ns_raw },
     { "NS", adns_r_ns },
     { "CNAME", adns_r_cname },
@@ -230,6 +231,13 @@ interpret_answer(
             } else {
                 struct in_addr *v = answer->rrs.inaddr+i;
                 a = Py_BuildValue("s", inet_ntoa(*v));
+            }
+            break;
+        case adns_r_aaaa:
+            {
+                char name[50];
+                inet_ntop(AF_INET6, answer->rrs.in6addr+i, name, sizeof(name));
+                a = Py_BuildValue("s", name);
             }
             break;
         case adns_r_hinfo:
